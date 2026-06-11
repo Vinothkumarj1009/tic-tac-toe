@@ -1,0 +1,71 @@
+<div class="page">
+
+  <div class="game-container">
+
+    <button
+      class="start-btn"
+      (click)="startGame()">
+      Start Game
+    </button>
+
+    @if (gameStarted && !gameOver) {
+      <div class="turn">
+        Current Player:
+        <span>{{ currentPlayer }}</span>
+      </div>
+    }
+
+    <div class="board">
+
+      @for (cell of board; track $index) {
+
+        <div
+          class="square"
+          (click)="makeMove($index)">
+
+          <span
+            class="mark"
+            [class.x]="cell === 'X'"
+            [class.o]="cell === 'O'">
+            {{ cell }}
+          </span>
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+  @if (gameOver) {
+
+    <div class="overlay">
+
+      <div class="winner-card">
+
+        @if (winner !== 'DRAW') {
+
+          <h1>
+            Winner: {{ winner }}
+          </h1>
+
+        } @else {
+
+          <h1>It's a Draw!</h1>
+
+        }
+
+        <button
+          class="restart-btn"
+          (click)="restartGame()">
+          Restart Game
+        </button>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>
